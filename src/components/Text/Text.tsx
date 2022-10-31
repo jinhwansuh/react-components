@@ -14,6 +14,7 @@ export interface TextProps {
   color?: string;
   className?: string;
   bold?: boolean;
+  tag?: 'div' | 'code' | 'p' | 'span';
 }
 
 function Text({
@@ -29,6 +30,7 @@ function Text({
   color,
   className,
   bold = false,
+  tag,
   ...rest
 }: TextProps) {
   const fontSize = useMemo(
@@ -38,6 +40,7 @@ function Text({
 
   return (
     <StyledText
+      as={tag}
       size={fontSize}
       marginTop={marginTop || marginAll}
       marginRight={marginRight || marginAll}
@@ -61,7 +64,7 @@ const getMargin = ({
   marginBottom,
   marginLeft,
 }: TextProps): string => {
-  return `${marginTop}px , ${marginRight}px, ${marginBottom}px, ${marginLeft}px`;
+  return `${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px`;
 };
 
 const StyledText = styled.span<TextProps>`

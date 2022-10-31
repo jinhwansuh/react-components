@@ -24,4 +24,5 @@ Primary.args = {
   marginAll: 0,
   color: 'black',
   bold: false,
+  tag: 'span',
 };
