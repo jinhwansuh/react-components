@@ -23,7 +23,8 @@
         "semi": "off",
         "react/react-in-jsx-scope": "off",
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-        "space-before-function-paren": "off"
-     
+        "space-before-function-paren": "off",
+        "comma-dangle": "off",
+        "react/prop-types": "off"
     }
 }
