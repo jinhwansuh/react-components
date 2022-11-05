@@ -9,7 +9,7 @@ export interface ProgressBarProps {
   height?: number;
   color?: string;
   duration: number;
-  width?: number | string;
+  width?: string | number;
   position?: string;
 }
 
@@ -33,10 +33,14 @@ function ProgressBar({
     }, duration * 1000);
 
     return () => clearTimeout(timer);
-  }, [duration]);
+  }, []);
 
   return (
-    <Container>
+    <Container
+      style={{
+        opacity: show ? 1 : 0,
+      }}
+    >
       <StyledProgressBar
         top={top}
         right={right}
@@ -47,14 +51,16 @@ function ProgressBar({
         width={width}
         position={position}
         duration={duration}
-        style={{
-          opacity: show ? 1 : 0,
-        }}
         {...rest}
       />
     </Container>
   );
 }
+
+const convertWidth = ({ width }: ProgressBarProps) => {
+  if (typeof width === 'number') return `${width}px`;
+  return width;
+};
 
 const Container = styled.div`
   position: relative;
@@ -66,7 +72,7 @@ const StyledProgressBar = styled.div<ProgressBarProps>`
   right: ${(props) => props.right};
   bottom: ${(props) => props.bottom};
   left: ${(props) => props.left};
-  width: ${(props) => `${props.width}px`};
+  width: ${convertWidth};
   height: ${(props) => `${props.height}px`};
   background-color: ${(props) => props.color};
   animation-name: progress;
