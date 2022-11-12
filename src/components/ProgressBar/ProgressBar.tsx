@@ -9,7 +9,8 @@ export interface ProgressBarProps {
   height?: number;
   color?: string;
   duration: number;
-  width?: string | number;
+  widthPx?: number;
+  widthPercent?: string;
   position?: string;
 }
 
@@ -21,7 +22,8 @@ function ProgressBar({
   left = 0,
   height = 20,
   color = 'red',
-  width = '100%',
+  widthPx,
+  widthPercent = '100%',
   position = 'absolute',
   ...rest
 }: ProgressBarProps) {
@@ -48,7 +50,8 @@ function ProgressBar({
         left={left}
         height={height}
         color={color}
-        width={width}
+        widthPx={widthPx}
+        widthPercent={widthPercent}
         position={position}
         duration={duration}
         {...rest}
@@ -56,11 +59,6 @@ function ProgressBar({
     </Container>
   );
 }
-
-const convertWidth = ({ width }: ProgressBarProps) => {
-  if (typeof width === 'number') return `${width}px`;
-  return width;
-};
 
 const Container = styled.div`
   position: relative;
@@ -72,7 +70,6 @@ const StyledProgressBar = styled.div<ProgressBarProps>`
   right: ${(props) => props.right};
   bottom: ${(props) => props.bottom};
   left: ${(props) => props.left};
-  width: ${convertWidth};
   height: ${(props) => `${props.height}px`};
   background-color: ${(props) => props.color};
   animation-name: progress;
@@ -85,7 +82,8 @@ const StyledProgressBar = styled.div<ProgressBarProps>`
       width: 0;
     }
     100% {
-      width: 100%;
+      width: ${(props) =>
+        props.widthPx ? `${props.widthPx}px` : props.widthPercent};
     }
   }
 `;

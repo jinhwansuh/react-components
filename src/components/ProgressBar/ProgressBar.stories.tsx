@@ -19,7 +19,9 @@ const Template: ComponentStory<typeof ProgressBar> = ({
 export const Primary = Template.bind({});
 
 Primary.args = {
-  duration: 5,
+  duration: 10,
   color: 'red',
   height: 30,
+  widthPercent: '100%',
+  widthPx: 0,
 };
